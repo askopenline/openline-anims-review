@@ -1,5 +1,7 @@
 # Operator logo assets
 
+> Openline company documentation: maintained in [askopenline/openline-anims-review](https://github.com/askopenline/openline-anims-review). See the [repository README](../../../README.md) for ownership, scope, and release boundaries.
+
 These are presentation assets for the existing [Multi Tier-1 review page](https://openline-anims-review.vercel.app/qa/multiple-tier1). They do not verify partner relationships, network availability or permission to use a mark in production.
 
 ## Existing marks

@@ -1,526 +1,70 @@
-# Openline — Animation Review
+# Openline Design and Animation Review
 
-## Current follow-up · 9 October 2026
+Openline's official review workspace for product animations, interface concepts, contextual QA, and implementation handoffs. Maintained by [Openline](https://openline.com) in [askopenline/openline-anims-review](https://github.com/askopenline/openline-anims-review).
 
-Release r4 adds the prominent `/delivery#follow-up` review of Irina's update:
-all seven page identities, five confirmed palette gaps, France's partial block
-integration and contradictory headline, mobile master-theme harmonisation,
-the reproduced help-composer resize issue and the required final
-Figma/React/ZIP/Markdown package. The selected login icon now has a light-neutral
-tile; the shared composer source includes minimum-height and resize-aware sizing.
-See `delivery/followup-2026-10-09.md`. Earlier release sections are historical.
+## What this repository is
 
-## Current delivery release · 6 October 2026
+This is a review and delivery environment, not the production Openline website or mobile application. It brings alternatives, selected designs, page-context previews, acceptance criteria, and implementation notes together so design and engineering can work from the same reference.
 
-Release r3 on 7 October adds `/mobile`: 28 extra React mobile views across six
-connected workflows, matching Irina's existing app-screen design system. Source
-is in `mobile-src`; compiled assets and documentation are in `mobile`. The
-delivery pack, QA extras menu, changelog and per-view checklist include this
-extension. Known earlier checklist progress URLs are migrated by stable IDs.
+- **Review preview:** [Animation and design review](https://openline-anims-review.vercel.app).
+- **Contextual QA:** [Page-context previews](https://openline-anims-review.vercel.app/qa).
+- **Delivery hub:** [Implementation handoff](https://openline-anims-review.vercel.app/delivery).
+- **Company repository:** The code and documentation here are the company-maintained copy. Existing preview hosting is configured separately and is not moved by copying this repository.
 
-`/delivery` is now explicitly authorized and implemented. Open
-https://openline-anims-review.vercel.app/delivery for Irina's full brief,
-30 frozen animation choices, 22 page entries, four extra tools plus the gift
-recipient entry, 56 change records and the source ZIP. Release r2 adds Paul's
-introductory handoff note and a 297-item interactive implementation checklist,
-with applied/verified/blocked states, URL progress snapshots, JSON backup/restore
-and Markdown reporting. This is self-reported progress, not a shared server tracker.
+## Start here
 
-Start with `delivery/brief.md`, `delivery/import-guide.md`,
-`delivery/page-matrix.md`, `delivery/copy-changes.md` and
-`delivery/acceptance.md`. `node delivery/serve.mjs` runs the source pack locally.
-The runtime source is frozen under `delivery/runtime/`; shared registry modules
-may contain historical alternatives, but the manifest is the selection contract.
+| Area | Purpose |
+| --- | --- |
+| [`index.html`](index.html), [`js/`](js/), [`css/`](css/) | Animation library, review controls, and shared presentation |
+| [`omdm.html`](omdm.html), [`producthunt.html`](producthunt.html), [`start.html`](start.html), [`choice.html`](choice.html) | Focused product and journey concepts |
+| [`qa/`](qa/) | Selected designs in page context, QA notes, and supporting assets |
+| [`delivery/brief.md`](delivery/brief.md) | Web implementation brief and scope |
+| [`delivery/import-guide.md`](delivery/import-guide.md) | Packaged runtime integration guidance |
+| [`delivery/acceptance.md`](delivery/acceptance.md) | Acceptance and production-verification gates |
+| [`delivery/checklist-guide.md`](delivery/checklist-guide.md) | Implementation checklist usage |
+| [`delivery/mobile-handoff.md`](delivery/mobile-handoff.md) | Separate mobile implementation scope |
+| [`delivery/followup-2026-10-09.md`](delivery/followup-2026-10-09.md) | Dated follow-up clarifications |
+| [`mobile-src/`](mobile-src/), [`mobile/`](mobile/) | Mobile review source and built reference |
 
-Older sections below and older scoped changelogs describe prior milestones,
-including the former delivery deferral. That deferral is superseded by this
-release. Production backend integration and final publication approval remain
-separate. Private commercial correspondence is deliberately outside this repo.
+## Run locally
 
-A review surface for proposed header and section animations across the Openline
-site, plus two full page redesigns. Built as a static site: no build step, no
-dependencies, no framework.
+Use a current Node.js release that supports `import.meta.dirname`. The included server preserves the clean-URL behavior used by the review pages and listens only on the local loopback interface.
 
-## What's in it
-
-**`index.html`** — the review app. 30 boards, each covering one animation slot on
-one page of the live site. Every board opens on option 0, a faithful replica of
-what currently ships (bugs included), followed by 15 proposed alternatives. Each
-proposal carries a family, a tagline, a rationale, pros and cons, and scores for
-story, motion, performance, mobile, brand and ease. A comparison matrix sits
-below each board.
-
-Boards are grouped by the page they affect: Multiple Tier-1, Global eSIM, Home,
-Network, Business, Hospitality, IoT, Openline+, Login, About, OMDM Market, Blog,
-Contact and Affiliate. One board is an icon set rather than animations (31 Aloha
-badge options).
-
-**`choice.html`** (`/choice`) — the selection walkthrough. It steps through every
-board one at a time, renders all of that board's options live side by side, and
-asks for one pick per section, by click or number key. Picks persist in
-`localStorage`, and the summary screen at the end emits both a Markdown table and
-a machine-readable JSON block to copy back. It reads the same board registry as
-the review app, so it can never drift out of sync with it.
-
-Every animation is embedded at the real measured size of the box it would occupy
-on the live page, so nothing looks better here than it would in production.
-
-**`omdm.html`** — a full redesign of `/omdm-market` in a fintech-clean direction:
-light ground, a single blue accent, monospaced numerals. Notes in
-`STYLE-OMDM.md`.
-
-Recommendation panels on most boards were written when those boards carried 10
-options, so they do not consider options 11–15; the boards say so in the UI. The
-Home › "Why choose Openline?" panel is the exception — its recommendation was
-written against all fifteen.
-
-**`producthunt.html`** — a full redesign of `/producthunt`. The hero is kept
-exactly as it ships; everything below is rebuilt, and the claim flow becomes a
-working three-state modal instead of a button that scrolls to itself. Notes in
-`STYLE-PRODUCTHUNT.md`.
-
-## Running it locally
-
-Any static file server will do:
-
-```bash
-python3 -m http.server 8099
+```sh
+git clone https://github.com/askopenline/openline-anims-review.git
+cd openline-anims-review
+node delivery/serve.mjs
 ```
 
-Then open `http://localhost:8099`.
+Open [the local delivery hub](http://localhost:8080/delivery), [the review library](http://localhost:8080), or [contextual QA](http://localhost:8080/qa). Set `PORT` if port 8080 is already in use.
 
-## Structure
+For the separate mobile source:
 
-```
-index.html            review app shell
-omdm.html             /omdm-market redesign
-producthunt.html      /producthunt redesign
-css/                  style.css (review app), omdm.css, producthunt.css
-js/
-  boards.js           board registry — nav badges derive counts from here
-  board.js            board renderer
-  kit.js              shared SVG kit: mk(tone) → wrap/card/label/mono/…
-  g-shared.js         orange-token kit for the Global eSIM family
-  <page>.js           variant registries, one file per page or section
-img/                  raster assets
-STYLE-OMDM.md         design tokens and handover notes
-STYLE-PRODUCTHUNT.md  design tokens, strategy and handover notes
+```sh
+cd mobile-src
+npm ci
+npm run dev
 ```
 
-## Conventions
+Run `npm run build` in that directory when preparing an updated mobile preview. Review its output before replacing committed built files.
 
-Variants are plain objects:
+## Review and implementation
 
-```js
-{ id, name, family, tagline, desc, pros[], cons[],
-  scores: { story, motion, perf, mobile, brand, ease },
-  build: (uid) => ({ svg, pills, init? }) }
-```
+1. Use the selected design and the relevant delivery item, not an abandoned alternative.
+2. Check the animation inside its destination page for spacing, text, focus, reduced motion, and mobile behavior.
+3. Keep web/shop integration and native mobile implementation as separate delivery and acceptance tracks.
+4. Record implementation decisions and unresolved questions in the delivery materials.
+5. Validate the integrated product, not only this reference preview. Production APIs, provisioning, payments, account state, and native behavior require their own tests.
 
-Animation is SMIL inside inline SVG — no runtime animation library. Two rules
-matter: every `keyTimes` must start at 0 and end at 1 with a length matching its
-`values`, and `transform` must be animated with `animateTransform` rather than
-`animate`. Registry arrays are declared at the end of each file so variant
-constants are initialised before use.
+The downloadable handoff packages are versioned snapshots. Editing source does not automatically rebuild a ZIP, update a collaborator's checkout, or deploy a production change.
 
-Setting `chosen: <index>` on a board marks the selected option with a badge, a
-tick in the nav, a highlighted matrix row, and makes it the default on load.
+## Prototype and attribution boundaries
 
-## /qa — picks in context
+Some flows simulate purchase-code redemption, account transitions, activation, connectivity, plan selection, or support interactions. Sample prices, network rosters, illustrative people, and successful end states are not proof of a live service, partner agreement, or production readiness.
 
-[`/qa`](https://openline-anims-review.vercel.app/qa) puts every chosen option back into the page it belongs to.
+- **Operator marks:** See the [operator asset notes](qa/assets/operators/README.md). Identification does not establish partnership or coverage.
+- **AI service icons:** See the [provider attribution](qa/assets/ai/README.md). External handoffs do not imply endorsement.
+- **Support portraits:** See the [illustrative portrait notes](qa/assets/support-portraits/README.md). They are not staff photographs.
+- **Openline work:** Company-created designs and documentation are maintained by Openline. Third-party materials retain their own rights and notices.
 
-- **15 pages** (`/qa/home`, `/qa/multiple-tier1`, … `/qa/affiliate`) are static captures of
-  openline-revisions-hub at 1440px with scripts removed. Each animated slot is marked
-  `data-qa-slot="<board key>"` and the picked option is mounted into it at the slot's real size.
-- **Defaults** come from `qa/selections.json` (the /choice export). Changes live in
-  `localStorage` (`openline-qa-v1`) and never touch that file.
-- **Panel** (`Q`): swap option, compare with what ships today, leave a note, flip the shared blog
-  slot between its two boards. Labels (`O`) sit on every slot.
-- **Colour**: `qa/recolor.js` moves accents around the OKLCH wheel (lightness kept, neutrals
-  untouched) across the site stylesheet, inline styles, SVG paint and SMIL values. Presets plus a
-  custom picker; "every accent" or "Openline orange only"; status green/red/amber can be kept.
-- **Export**: "Copy for Computer" gives a Markdown table + machine-readable JSON (picks, notes, theme).
-- Option code is imported from `/js` — the same registry as the boards and /choice — so an edit
-  to an option shows up in /qa with no copy to update.
-- Re-capture: `qa/tools/capture.py` then `qa/tools/build.py`.
-
-### /qa additions
-
-- **Page identities** (`PAGE_STYLES` in `qa/core.js`): Network → Corporate blue (royal blue on navy ink),
-  Security → Vault teal, AdBlocking → Ultraviolet, Unlimited → Hot magenta, Blog → Newsprint (mono,
-  Openline typography, square corners). Each recolours its page and the animations on it; switchable per page.
-- **Features pages** `/qa/security`, `/qa/adblocking`, `/qa/unlimited` captured (no boards; here for identity).
-- **Redesigns** `/qa/about-redesign`, `/qa/contact-redesign`: every piece of the live copy kept, new layout,
-  plain HTML/CSS on the captured header/footer. Source in `qa/redesign/`, built by `qa/tools/redesign.py`.
-- **Modal builder** `/qa/modals`: 8 types, 327 generated + 31 Aloha animated icons (`qa/icons-lib.js`),
-  60 Openline templates in 7 categories with a searchable miniature menu (`qa/modal-templates.js`),
-  16 content block types (eSIM card, steps, QR, choice, toggle, rating, image, divider…), cover images
-  (upload or `qa/modal-illus.js` illustrations), 0–2 CTAs plus a text link; preview over a real page or a phone.
-- **Support chat** `/qa/chat`: capture of /all-countries; the support badge opens a full-screen chat
-  (`qa/support/chat.js`) — fresh guest welcome, local history, composer with files (pick, drop, paste), voice notes (MediaRecorder,
-  explicit permission-error handling), simulated replies, and a collapsible panel: WhatsApp / Instagram / Messenger / email,
-  "Ask an AI about us" (ChatGPT, Claude, Perplexity, Gemini, Grok, Copilot, Le Chat, clipboard handoff), KB and
-  compatibility. The badge opens it on every /qa page.
-- **Help modals** `/qa/kb`: the knowledge-base and device-compatibility modals (`qa/support/support.js`) on the
-  real open-source data (`qa/data/kb-articles.json` from openline-kb, `qa/data/devices.js` from openline-check;
-  search engine `qa/support/search.mjs` from openline-kb). Opened by `data-ol-open` markup, `#kb` / `#compat=`
-  hashes, `Openline.open()`, or ⌘K; the page documents each with live examples.
-- Home › Why choose: board embed is now the real 407 × 302 slot; 3 · The Handover redrawn for it.
-- **Page menu**: the page name in the bottom dock opens a filterable list of all 21 pages plus the tools
-  (type to filter, ↑ ↓ to move, Enter to go, Esc to close).
-- Home › Referral: 3 · Link in Flight redrawn for its real 576 × 520 slot, with no background of its own
-  so it sits on the box's flat orange (slot `clear: true`); a four-beat ticker fills the middle; its dotted field fades in from 0% at the left edge to 100% at the right.
-- **Context fit** (`fitArt` in `qa/qa.js`): options drawn on the 640 × 460 board stage have their viewBox
-  re-cut to the slot's shape around what is drawn (even padding, ≤ 1.2× zoom) and their full-bleed layers
-  stretched, so dotted fields run edge to edge. `clearFill` drops opaque panels on hero art (Contact,
-  Affiliate). Live badges beside a slot step aside when a proposal brings its own; two top-right badges
-  share one row.
-- **IoT identity** Chrome: purple/indigo become steel and graphite (`scope: 'families'` in `qa/recolor.js`),
-  saturated solids take a brushed-metal gradient (`sheen`). Marked `selected: true` — the default, recorded
-  in `qa/selections.json` (`pageStyles`), shown as Selected in the panel, hub and export, and restored by Reset.
-- Referral board (`/` → Home › Refer a friend box): option 3's dotted field runs past its 576 × 520 frame so
-  the 640 × 460 board stage has no bands, and inside the orange box the stage takes the box's own orange.
-
-### /qa typography
-
-- **Reference:** the computed interface font on [Openline](https://openline.com) and the
-  [revisions hub](https://openline-revisions-hub.vercel.app/home) uses the native
-  `ui-sans-serif, system-ui, sans-serif` stack with emoji fallbacks. Play is reserved for the wordmark.
-- **One shared stack:** `qa/typography.css` covers captured pages, About/Contact redesigns, the review
-  dock, page menu, hub, animation text, modal builder, chat and help modals. `qa/typography.js`
-  mirrors the stacks for standalone copied modal HTML and embedded illustration SVGs.
-- **No substitute interface fonts:** Inter-first declarations and decorative monospace labels have
-  been removed. Blog keeps its monochrome editorial layout but uses the same Openline family rather
-  than loading Newsreader. Real code snippets, keyboard hints, redemption codes and OTP fields retain
-  a shared monospace stack; numeric animation text uses tabular figures in the main family.
-- **Scope:** font-family changes are confined to `/qa`; the original animation boards are unchanged.
-  Font sizes, animation timing and page identities are preserved. Rebuild redesign HTML with
-  `python3 qa/tools/redesign.py` after changing `qa/redesign/rd.css`.
-
-### /qa animation refinements
-
-- `qa/animation-fixes.js` applies context-only corrections through `renderOption`, covering both the
-  page and hub previews without modifying the original comparison boards.
-- Openline+ / Built for Digital Nomads / Six Cities, One Number: destination labels remain steady
-  instead of repeating their 350ms entrance fade. The connection dots still travel to the fixed
-  number column, which now shows the fictional US example `+1 202 555 0148`.
-
-### /qa retained redesigns
-
-The earlier About and Contact alternatives are retained, together with the
-separately requested Product Hunt redesign added to QA on October 4. The later batch of
-16 alternatives was removed at Paul's request, including its generator and
-dedicated assets. The review now contains 18 original product pages plus these three
-redesigns. Shared typography, page identities, modal/chat tools and the Openline+
-nomad animation fixes are preserved. No `/delivery` has been created.
-
-### /qa/producthunt: existing redesign in context
-
-The existing [Product Hunt redesign](https://openline-anims-review.vercel.app/producthunt) now has a
-QA route at `/qa/producthunt`. The root source page, stylesheet, script and Kitty asset are untouched.
-Run `python3 qa/tools/producthunt.py` to rebuild the QA copy and combined page stylesheet.
-
-- Preserves the existing design and page sections rather than creating another alternative.
-- Adds the shared dock/page menu, page-level panel notes, full change export, colour preview and support.
-  The navigation has 21 entries: 18 original pages and three explicitly retained/requested redesigns.
-- Uses the actual Openline mark and native UI stack. Decorative monospace styling is normalised;
-  coupon strings stay monospaced. CTA arrows use the same subtle motion and reduced-motion fallback.
-- Marks the campaign as a draft and replaces “Launching this September” with an unconfirmed launch-date
-  label rather than guessing a new date. Rewards, example pricing, eligibility, review timing and
-  platform-policy compatibility remain unapproved campaign concepts.
-- The QA-only native claim dialog validates URL/email format, checks the Product Hunt hostname for
-  that lane, and animates code preparation. It generates only a non-redeemable `PH-QA-10-…`
-  string. No proof link is opened, no email/reward is sent, and no claim details enter storage or a backend.
-- Closing cancels pending work; clipboard denial gets selectable fallback text, not a false “Copied”
-  confirmation. Modal state headings, focus containment, keyboard access and mobile layout are tested.
-
-### /qa/start: purchase code to eSIM
-
-Standalone process extra inspired by the current [Openline /start](https://openline.com/start),
-not another batch of alternative marketing pages. `qa/start.html`, `start.css` and `start.js`
-use the shared native UI stack, Openline's orange/ink palette and the live site's logo mark.
-
-- Three-part code entry with uppercase/whitespace normalization, validation, clear and sample-code controls.
-- Read-only code check → sample Japan plan → explicit activation confirmation → animated code-to-profile reveal.
-- The confirmation follows Paul's requested rule: activation starts validity immediately and removes gifting eligibility.
-  It defaults to “Not yet” and requires a large centred readiness switch before confirming.
-- Gift flow copies a clearly labelled example message; it never sends a message. Account links use the existing `/qa/login`.
-- Error controls cover unknown, already-used and connection-error codes plus a recoverable demo activation failure.
-  They now live in the persistent demo badge's dialog, keeping the main flow uncluttered.
-- The plan review has three distinct Activate / Gift / Account cards, with larger native UI type.
-  Code help, timing, device instructions and save details use dedicated dialogs instead of repeated paragraphs.
-- No real redemption/provisioning/account API calls, no persistent code storage and no installable eSIM QR.
-  The code format and plan/profile data are demonstration fixtures, not verified production validation rules.
-- Accessible native dialogs, keyboard handling, reduced-motion treatment, and mobile layouts.
-
-#### Final profile handoff
-
-- `qa/start-profile.js` / `start-profile.css` extend the final stage into **eSIM details → Setup & connect
-  → Make it yours → account handoff**. This is now inline, not behind a “Set up my eSIM” button or modal.
-  The QR and profile card appear immediately after activation; manual details start collapsed.
-- The disclosure contains copyable SM-DP+ address, activation code, full LPA string, ICCID and internal
-  Openline profile ID. The sample does not require a confirmation code. EID is explicitly unlinked:
-  it belongs to the device's eSIM chip, not the subscription profile; see the
-  [GSMA consumer eSIM architecture](https://www.gsma.com/solutions-and-impact/technologies/esim/wp-content/uploads/2024/09/SGP.21-v2.6.pdf).
-- `qa/tools/start_demo_qr.py` generates a genuine QR image whose payload is a harmless QA notice, not
-  an LPA installation string. The separately displayed manual credentials use the reserved `.invalid`
-  domain and an explicit QA example token. All IDs are fictional; no real profile can be installed.
-- Device-specific instruction summaries use existing KB articles 17/18/20/21/22 and article 8's
-  connection checklist. The full guide opens `/qa/installation-guide#ig-install-steps` in a new tab,
-  preserving its layout and animation. Manual iPhone installation terminology is consistent with
-  [Apple's setup guidance](https://support.apple.com/en-gb/118669). The prototype keeps the requested
-  immediate-validity rule separate from installing/enabling the line at the destination.
-- The visible setup view uses private Wi-Fi plus three large setting cards: Openline for primary
-  mobile data, automatic data switching OFF, and roaming ON for Openline. Device paths and the
-  user's private-Wi-Fi / avoid airport-public-Wi-Fi and 4G/5G setup guidance are in detail dialogs.
-- An optional label, existing sample folder or newly named folder update the visible profile. Only
-  `{label, folder}` is session-stored under `openline-qa-profile-organisation-v1` for the purchaser and
-  the separate `openline-qa-profile-organisation-v1-recipient` key for the recipient, never codes,
-  installation credentials or the plan state. Storage failure is disclosed and retains an in-memory
-  result. Restart flow clears this organisation state.
-- The completion screen shows the saved label/folder and links to the existing `/qa/login` sign-in
-  preview. Paul requested that simulation notices move out of the customer-facing design into this
-  handoff and the QA panel. The clean “You're connected” finale remains simulated; production needs
-  authoritative provisioning and connectivity status before showing it.
-- The final handoff is recorded separately in the global QA manifest/export. This completes the
-  review prototype of the purchase-code activation journey; no `/delivery` or account backend was added.
-- Full copy/layout/interaction handoff: `qa/start-changelog.md`, included in the QA panel/export registry.
-
-### About redesign refinements
-
-- Network Technology / The Most Reliable Connection: scoped heading styles resolve the generic
-  `.rd-card p` cascade that flattened the comparison headings and removed their list spacing.
-  Both card bodies now have balanced desktop/mobile padding and consistent bullet spacing.
-  The SVG illustrations, geometry and motion are unchanged.
-- Open Startup is a locked, coming-very-soon disclosure. Show / Hide results preview is a real
-  keyboard-accessible button, expanded by default; every value remains a locked placeholder.
-  The former sample financial/user values and Live badges were removed from this section rather
-  than hidden with CSS, so expanding never presents fabricated metrics as actual results.
-- Team locations are New York, Lisbon, Warsaw, Ankara, Bristol, Berlin, Paris, Singapore and Bali.
-  Location badges replace invented employee initials; the footer says “Nine locations, one team.”
-  Local clocks use native `Intl.DateTimeFormat` with IANA zones, including
-  [Asia/Makassar for Bali](https://time.is/Bali,_Bali),
-  [Europe/Istanbul for Ankara](https://time.is/Ankara) and
-  [Europe/London for Bristol](https://time.is/Bristol).
-  The selected team animation and original About comparison page are unchanged.
-- These three refinements have separate entries in `qa/change-log.js` and the full QA export.
-
-### Contact and installation refinements
-
-- Contact redesign: WhatsApp `https://wa.me/15554842461`, Instagram `askopenline`,
-  Messenger / Facebook `askopenline`, email `ask@openline.com`. A separate hotline card sits below
-  24/7 Global Support, labelled **Coming soon**, displaying `+1 (8) 123 - ONLINE` without a `tel:` action.
-- All three support-process steps are keyboard-clickable and seek the SVG's own timeline. The
-  loop continues; pressed states follow the current scene. Reduced motion keeps manual seeking.
-- `qa/tools/installation_preflight.py` replaces only the marked installation preflight region.
-  The latest version is a two-path choice: the primary Install my eSIM card leads to the existing
-  walkthrough, while the secondary purchase-code card links to `/start`, a lightweight redirect
-  alias to `/qa/start`. The former comparison bridge and three-step roadmap are superseded.
-  Source is `qa/redesign/installation-preflight.html`; CSS is scoped `.igp-*`.
-  Compatibility, redemption and installation links remain. Two larger icon-led help buttons open
-  native detail dialogs for code terminology and connection guidance. The latter covers private Wi-Fi,
-  activation near the trip, Openline as primary data, other SIM/eSIM mobile data and automatic
-  switching OFF, roaming ON for Openline, and an airplane-mode refresh. These are instructions,
-  not detected phone settings.
-  The rest of the captured HTML and selected installation animation are preserved byte-for-byte.
-  Runtime fills icons, adds anchors/focus targets and handles the two dialogs. See
-  `qa/installation-preflight-changelog.md`.
-- Timing clarification: activate just before departure or on arrival. Confirming at /start starts
-  validity and ends gifting, while profile installation/activation should use stable private Wi-Fi.
-  Airport/public Wi-Fi and cellular connections may block the setup, per Paul's supplied guidance.
-  Unrelated walkthrough copy is not silently rewritten during this targeted edit.
-
-### Chat refinements and safe prototype boundaries
-
-- Chat branding now uses the actual Openline mark (`qa/assets/start-brand-mark.png`) in the header,
-  animated welcome and Gary's AI avatar, rather than the earlier hand-drawn ring and sparkle.
-- Seven [CC0 Pravatar placeholder portraits](https://pravatar.cc/) sit in a single centred row above
-  “Here to help you stay connected” in both fresh and existing conversations. They remain
-  illustrative, not real employee identities or availability signals, and are served locally from
-  `qa/assets/support-portraits/`. Their order is shuffled once per opened chat, not on each render.
-
-- Collapsed sidebar is one full-height button, including its arrow and decorative channel icons.
-  Expanded arrow and header icon also toggle it. Hidden content is inert and expanded state is exposed.
-- Nine editable AI prompts (the previous four plus phone readiness, data estimate, multi-country
-  travel, no-connection troubleshooting, gifting/activation). Every provider opens a native handoff
-  dialog and attempts clipboard copying. Success is only stated after the promise resolves;
-  denied permission leaves selectable text and a retry. No query-string prompt or chat transcript is sent.
-- Official web interface launch destinations checked on 2026-10-03:
-  [ChatGPT](https://chatgpt.com/), [Claude](https://claude.ai/new),
-  [Perplexity](https://www.perplexity.ai/), [Gemini](https://gemini.google.com/app),
-  [Grok](https://grok.com/), [Copilot](https://copilot.microsoft.com/),
-  [Le Chat](https://chat.mistral.ai/chat). Standard HTTPS links defer any installed-app handling to the OS;
-  an installed app cannot be reliably detected or forcibly launched from this browser preview.
-- Provider favicons/logos are stored locally under `qa/assets/ai/`. ChatGPT, Claude, Gemini, Grok and
-  Copilot use their published icon assets; Perplexity and Le Chat use Google's cached site favicon
-  because those public source pages blocked retrieval. These identify external services, not Openline partners.
-- “Clear chat” requires confirmation, defaults to keeping the chat and returns to the welcome.
-  Its technical local-only boundary is recorded here, not in a customer-facing warning.
-  No server deletion API or actual ticket closure is connected. Clearing cancels pending replies,
-  stops recordings/playback, releases attachments and returns to an animated guest welcome with Gary's greeting.
-- New visitors also begin at the welcome. Saved conversations remain until explicitly cleared.
-  Replies remain simulated even though the user requested removal of the intrusive preview labels.
-
-### Redesign button parity
-
-- Compared the retained redesigns to the live [Openline About page](https://openline.com/about) and
-  original captures. Main actions use the native UI family at 16px / 24px, weight 500; compact contact
-  actions and mobile purchase buttons use 14px. Button icons are 16px; the quiet partner link uses
-  14px type and a 12px icon. Corners are 8px, with 8px base gaps and source-like horizontal insets.
-- Right-arrow shapes match the current source. Only the arrow shifts 4px over 150ms with the source
-  cubic-bezier(.4,0,.2,1); labels stay stationary and the previous whole-button lift is removed.
-  The same feedback works for keyboard focus and press, while reduced motion stays static.
-- Main desktop buttons follow the 40px baseline and compact channel buttons 36px; mobile tap targets
-  remain at least 44px. Purchase CTAs use the source-style “Buy eSIM Now” mobile label and a compact
-  country badge, preserving the existing QA copy's 190+ count. The badge hides on the narrowest screens
-  rather than shrinking the action text or overflowing its container.
-- Button typography/dimensions remain scoped to About and Contact redesign actions, not navigation
-  menus, disclosure chevrons or selected illustrations.
-- The same arrow treatment also applies to `/qa/start`, including its inline profile flow, back
-  links, guide/account links and QR download. Forward/back arrows nudge 4px; diagonal and downward
-  arrows move in their own direction over the same 150ms curve. Loading/disabled states and reduced
-  motion stay static. The check-code button restores its SVG after loading and errors.
-  The later `/start` redesign expands type and controls further while preserving the activation animations.
-
-### Connectivity copy and profile flexibility
-
-- On 2026-10-04, the marked Multi Tier-1 warning/probability block was replaced with
-  a two-route explainer: selecting a network within the current eSIM, or occasionally
-  issuing a whole replacement profile to change the underlying provider and service stack.
-  The same prominent section replaces Unlimited's former competitor-throttling comparison.
-- This follows Paul's supplied operating principle for multi-network access and unlimited usage.
-  Both pages disclose that replacement should be uncommon, may require installation or enabling
-  a new profile, and is part of maintaining service. The unsupported 90% / 10% split and fixed
-  30-second replacement claim are gone, as is the instruction to remove a working profile first.
-- `qa/connectivity-copy.json` records 45 Multi Tier-1 and 53 Unlimited before/after changes.
-  Run `python qa/tools/connectivity_copy.py` to apply them idempotently, rebuild the shared section
-  from `qa/redesign/profile-switching.html` and `qa/profile-switching.css`, and regenerate
-  `qa/connectivity-changes.js` and `qa/connectivity-changelog.md`.
-- Hero, feature, checklist, process and closing copy distinguish usage from speed and availability.
-  No guarantee of continuous maximum speed, congestion-free service, always-cheapest routing or
-  setup-free profile replacement is added. Unlimited's former red competitor-failure rows are now
-  neutral grey customer-use rows with circle markers. The selected Operator Roster labels are adjusted
-  in the QA adapter only; the selected animation choices, motion and original review boards remain.
-- The section has stable text, a gentle connector animation, responsive cards, reduced-motion support,
-  and crosslinks between the two explanations. It is not a provisioning workflow. Silent installation,
-  zero interruption, balance/validity carry-over, notification policy and replacement charges remain
-  product/implementation questions, not promises made by this prototype.
-- The QA panel and hub include a new-entry record plus a separate copy record for each page, expandable
-  before/after rows and a full changelog link. The same entries appear in the global Markdown and
-  machine-readable exports, separately from animation picks.
-
-### Global eSIM orange default
-
-- `/qa/global-esim` now selects an Openline-orange page identity by default, including pale colour
-  washes, icon tiles and contextual SVG/JS animation colours previously blue, purple or green.
-  The page-specific mapper also recolours green status accents here; their labels preserve meaning.
-- Neutral surfaces, photographs and raster partner logos are preserved. Other page identities,
-  including the selected IoT Chrome treatment, are unchanged. The panel toggle still allows comparison,
-  and the selected default / current toggle state are included in the export.
-
-### Unlimited plan clarification for Irina
-
-- Paul's subsequent 2026-10-04 clarification supersedes the earlier generic Unlimited wording:
-  fixed packages guarantee every purchased GB at full available network speed with no usage-based
-  throttling. A 10 GB purchase means all 10 GB at full speed. Unlimited plans have no Openline-imposed
-  cap or throttling, but remain subject to local MNO fair-use rules, including possible temporary
-  slowdown after heavy data use within 24 hours.
-- Fixed packages are explicitly recommended when avoiding throttling is the priority. For frequently
-  throttled unlimited plans, Openline will try another eSIM profile/provider infrastructure whose
-  fair-use policy may better fit the location and usage. Better performance or freedom from future
-  throttling is not guaranteed. No universal threshold, recovery period or midnight reset is invented.
-  Full available network speed is not a universal Mbps guarantee and still depends on radio conditions.
-- `qa/unlimited-plan-copy.json` is the latest revision. The existing connectivity builder composes it
-  over the original copy inventory without replaying superseded text. It accepts original captures,
-  the previous revision and the current revision, and generates both consolidated original-to-current
-  copy and a previous-to-current revision log including the new profile-section wording.
-- The panel, hub, Markdown changelog and Copy for Computer export contain the dedicated
-  `unlimited-fixed-vs-mno-fair-use` Irina handoff record. Apply this copy with the current page colours,
-  native typography, preserved animation geometry/timings, neutral use-case cards and profile explainer.
-  The handoff is recorded only; no message has been sent to Irina and no production Openline page changed.
-  This revision does not alter Multi Tier-1, Global eSIM or the original animation boards.
-
-### QA reporting beyond animation choices
-
-- `qa/change-log.js` is the shared, manually maintained change inventory: active refinements, exact scopes,
-  selected defaults, prototype limitations, rejected alternative decision and pending handoff questions.
-- Each page panel has **Beyond animations** and persisted page-level notes. The hub at `/qa#qa-changes`
-  shows all changes and accepts notes for the four tools too. Global Copy for Computer includes the inventory,
-  page notes, section notes, theme / identity state, shared-slot choices and machine-readable schema v3.
-- Animation-pick deltas are explicitly separate from implementation records. Resetting picks retains
-  page notes and the inventory. Export contains no entered purchase codes or private chat content.
-- The modal builder retains its separate detailed draft and HTML exports; those should accompany the
-  global inventory when handing off a specific modal. No `/delivery` has been created.
-
-### France: original template, Unlimited lightly refined
-
-- Paul rejected the full France selector redesign on 2026-10-04. The choice cards, dark summary
-  and rebuilt fixed cards are removed, along with their CSS/JS/fragment. Do not deliver that design.
-- The existing `/qa/country-fr-redesign` URL now shows the original
-  [France template](https://openline-revisions-hub.vercel.app/country-fr), with only slight Unlimited
-  presentation changes: aligned controls, level presets, lighter borders/shadows and consistent CTAs.
-  Data Bundles retains the original source markup/appearance and position below Unlimited.
-- `python qa/tools/country_fr.py` captures the original read-only and annotates its own Unlimited
-  markup. It adds `qa/country-fr-refinement.css`, `qa/country-fr-refinement.js` and the compact
-  `qa/redesign/country-fr-dialogs.html`. No wholesale selector substitution remains.
-- The fair-use text and closely spaced question mark form one un-underlined clickable button,
-  and the policy modal is built from
-  `qa/unlimited-plan-copy.json`. Its fixed-package action scrolls to Data Bundles, not a new selector.
-  Source prices, custom days, date-duration and local cart/review remain safe demonstrations.
-  The original calculator is accessed through the reference page, outside this focused refinement.
-- The travel-date action now restores the original calendar-range interaction through
-  `qa/calendar-range.js`: two months on desktop, one on mobile, range highlighting, endpoint editing,
-  month/year keyboard navigation, Reset and Apply/Cancel. Only applied dates change the day count
-  and price. Calendar-day arithmetic is inclusive and DST-safe; totals use the block's own pricing
-  function and USD, not the reference modal's mismatched fixed daily estimate.
-- Latest calendar polish hides the visible shortcut hint while preserving accessibility, separates
-  the day-count/total/daily-rate quote, uses orange Reset and a stronger Apply action, and aligns
-  Unlimited control styling. The later duration-card revision removes the six preset icons and
-  adds original-style card shadows and a restrained selected lift. Other control icons retain motion.
-- `python qa/tools/country_fr.py --refresh-local` updates only the controlled dialogs and scoped
-  stylesheet, so modal iterations preserve the surrounding captured page.
-- `qa/country-fr-changelog.md` and the shared panel/export explicitly record the rejection and
-  current restrained direction for Irina. Page 22 is classified as a refinement, not a retained
-  redesign. No source-app write, production checkout, provisioning or `/delivery` is introduced.
-
-### Latest contextual refinements and clean presentation
-
-- France's unrelated FAQ coverage illustration is replaced by a responsive KB → AI → human support
-  sequence. Emphasis cycles slowly, steps are clickable, pause/resume works, offscreen playback stops,
-  and reduced motion stays static. Chat and KB CTAs open the existing support tools.
-- The shared Multi Tier-1 / Unlimited replacement explainer now has shorter copy, 28px card headings,
-  18px body text, clearer diagrams and an expandable detailed disclosure. The local-MNO caveat,
-  best-effort replacement and fixed-data recommendation are retained, not softened into guarantees.
-- `/qa/start` uses the normal 64px Openline header and source-style nav/cart/Sign In/locale controls.
-  Entry gift/account actions and completion details/edit actions are full buttons. The lower
-  compatibility/help row is removed. Header locale is English/USD only; cart is not backend-connected.
-- Per Paul's request, customer-facing demo notices are removed from Start, France, chat, Product Hunt,
-  Contact and installation instructions. Technical boundaries remain documented here and in the QA
-  panel/export. This changes presentation, not backend availability, safe fixtures or production approval.
-- Microphone denial no longer creates a pretend recording. It shows a normal permission error instead;
-  actual clipboard/storage errors remain truthful. No email, purchase, reward, activation or support
-  ticket operation is newly connected by this revision.
-- `/qa/start` now repeats the QR inside the installation-help dialog and spells out primary Openline
-  data, other-line data OFF, automatic switching OFF and Openline roaming ON, followed by an airplane
-  ON/OFF reconnect suggestion. The two completion actions have vertically centred icons and open
-  compact QR/edit dialogs without changing the current step. Editing has isolated draft state,
-  save/cancel semantics, custom-folder validation and synchronised profile displays.
-- The installation preflight now prioritises “I already have my eSIM” with an orange Install my eSIM
-  CTA into the existing walkthrough. A separate neutral “I have a purchase code” card links to `/start`.
-  The earlier code-to-profile bridge and forced three-step roadmap are superseded; help dialogs remain.
-- Gifting includes the purchase-owner validation-email rule and an explicit unlock-for-transfer
-  confirmation before Copy gift message. Unlocking is separate from activation and exists only in
-  local concept state; ownership checks, email and transfer APIs still need production integration.
-- The recipient flow is available at `/qa/start?recipient=1`, through “Received a gift?”, and through
-  “Open recipient view” after the sender unlocks. It carries the code only in memory, reviews the gift,
-  offers keep-for-later, requires the readiness switch to redeem/activate, and continues through the
-  QR/setup/organisation/account handoff. Locked and pending-owner-validation branches block activation.
-  Sender and recipient label/folder storage are isolated. A local ledger prevents reuse in the current
-  run; real ownership, purchase validation and one-time redemption need authoritative server checks.
-- The Multi Tier-1 operator wall is now two slow counter-moving logo ribbons, with pause/play,
-  hover/focus/offscreen pausing, reduced-motion scrollable rows and a searchable native directory.
-  The 36-name roster, surrounding wording and existing chosen animations are preserved. Three
-  incorrect source-logo mappings are corrected in this showcase only. Use
-  `python qa/tools/operator_showcase.py`; details and asset provenance are in
-  `qa/operator-showcase-changelog.md` and `qa/assets/operators/README.md`.
+For product information or company enquiries, use [Openline](https://openline.com). For repository corrections, use [this repository's issues](https://github.com/askopenline/openline-anims-review/issues).

@@ -1,5 +1,7 @@
 # AI service icons
 
+> Openline company documentation: maintained in [askopenline/openline-anims-review](https://github.com/askopenline/openline-anims-review). See the [repository README](../../../README.md) for ownership, scope, and release boundaries.
+
 Locally hosted provider favicons identify the external service in `/qa/chat`.
 These are provider marks, not new Openline branding or an endorsement claim.
 
