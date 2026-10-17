@@ -1,6 +1,7 @@
-# AI service icons
+<!-- OPENLINE-GUIDE-VISUAL -->
+![Design Review: company resource guide](https://raw.githubusercontent.com/askopenline/openline-anims-review/master/.github/assets/guide-header.png)
 
-> Openline company documentation: maintained in [askopenline/openline-anims-review](https://github.com/askopenline/openline-anims-review). See the [repository README](../../../README.md) for ownership, scope, and release boundaries.
+# AI service icons
 
 Locally hosted provider favicons identify the external service in `/qa/chat`.
 These are provider marks, not new Openline branding or an endorsement claim.
@@ -16,3 +17,8 @@ Retrieved 2026-10-03:
 - Le Chat, favicon-cache fallback: https://www.google.com/s2/favicons?domain=chat.mistral.ai&sz=128
 
 Provider interface URLs and fallback constraints are documented in the root README.
+
+<!-- OPENLINE-GUIDE-NAV -->
+## Company reference
+
+This guide belongs to [Openline Design Review](https://github.com/askopenline/openline-anims-review), maintained by Openline. Return to the [project overview](../../../README.md) for the broader system, current company links, and release context.

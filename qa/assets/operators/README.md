@@ -1,6 +1,7 @@
-# Operator logo assets
+<!-- OPENLINE-GUIDE-VISUAL -->
+![Design Review: company resource guide](https://raw.githubusercontent.com/askopenline/openline-anims-review/master/.github/assets/guide-header.png)
 
-> Openline company documentation: maintained in [askopenline/openline-anims-review](https://github.com/askopenline/openline-anims-review). See the [repository README](../../../README.md) for ownership, scope, and release boundaries.
+# Operator logo assets
 
 These are presentation assets for the existing [Multi Tier-1 review page](https://openline-anims-review.vercel.app/qa/multiple-tier1). They do not verify partner relationships, network availability or permission to use a mark in production.
 
@@ -17,3 +18,8 @@ Three image/name mismatches in the source grid are corrected only in this showca
 - **SK Telecom:** Its entry displayed KT. Replacement from [Logo.wine’s SK Telecom page](https://www.logo.wine/logo/SK_Telecom), original image: https://download.logo.wine/logo/SK_Telecom/SK_Telecom-Logo.wine.png
 
 The original downloaded replacements are retained alongside the resized WebP derivatives. Brand names and marks belong to their respective owners; asset sourcing does not establish an Openline partnership or grant a commercial licence.
+
+<!-- OPENLINE-GUIDE-NAV -->
+## Company reference
+
+This guide belongs to [Openline Design Review](https://github.com/askopenline/openline-anims-review), maintained by Openline. Return to the [project overview](../../../README.md) for the broader system, current company links, and release context.
